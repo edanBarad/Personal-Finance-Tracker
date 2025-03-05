@@ -4,11 +4,21 @@ public class Transaction {
     private String date;
     private String type;
 
-    public Transaction(double amount, String category, String date, String type){
-        this.amount = amount;
-        this.category = category;
-        this.date = date;
-        this.type = type;
+    public Transaction(double amount, String category, String date, String type) throws Exception {
+        if (amount <= 0){
+            throw new Exception("ERROR: Amount must be grater than 0!");
+        }else if(category.isEmpty()){
+            throw new Exception("ERROR: Must mention category!");
+        }else if (!date.matches(".*\\d.*")){
+            throw new Exception("ERROR: Invalid date!");
+        }else if (!type.toLowerCase().equals("income") && !type.toLowerCase().equals("expense")){
+            throw new Exception("ERROR: type must be \"income\" or \"expense\"");
+        }else{
+            this.amount = amount;
+            this.category = category;
+            this.date = date;
+            this.type = type;
+        }
     }
 
     public double getAmount() {

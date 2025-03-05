@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 public class FinanceManager {
     private ArrayList<Transaction> transactions;
+
+    public FinanceManager() {
+        this.transactions = new ArrayList<Transaction>();
+    }
+
     public FinanceManager (ArrayList<Transaction> transactions){
         this.transactions = transactions;
     }
@@ -35,7 +40,7 @@ public class FinanceManager {
                 writer.write(t.toString()+"\n");
             }
             writer.close();
-            System.out.println("File written");
+            System.out.println("File saved!");
         } catch (IOException e) {
             System.err.println("Error writing to file: " + e.getMessage());
         }
@@ -56,12 +61,17 @@ public class FinanceManager {
         amount = Double.parseDouble(input.substring(0,endOfWord));
         input = input.substring(endOfWord+2);   //Shorten the line
         category = input.substring(input.indexOf('(')+1, input.indexOf(')'));
-        return new Transaction(amount, category, date, type);
+        try{
+            return new Transaction(amount, category, date, type);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public void loadFromFile(String filename) throws FileNotFoundException {
         try{
-            BufferedReader br = new BufferedReader(new FileReader("first.txt"));
+            BufferedReader br = new BufferedReader(new FileReader(filename));
             String line = br.readLine();
             while (line != null && !line.isEmpty()){
                 this.addTransaction(getTransaction(line));
@@ -75,12 +85,12 @@ public class FinanceManager {
     }
 
     @Override
-    public String toString(){
-        String ans = "";
-        for (Transaction t: this.transactions){
-            ans += t.toString() + "\n";
+    public String toString() {
+        StringBuilder ans = new StringBuilder();
+        for (Transaction t : this.transactions) {
+            ans.append(t.toString()).append("\n");
         }
-        return ans;
+        return ans.toString();
     }
 
 }
