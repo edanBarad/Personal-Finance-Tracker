@@ -1,4 +1,4 @@
-import java.io.FileWriter;
+import java.io.*;
 import java.util.ArrayList;
 
 public class FinanceManager {
@@ -28,8 +28,49 @@ public class FinanceManager {
         System.out.println("Balance = " + balance);
     }
 
-    public void saveToFile(String filename){
-        //FileWriter writer = new FileWriter();
+    public void saveToFile(String filename) throws IOException {
+        try{
+            FileWriter writer = new FileWriter(filename);
+            for(Transaction t: this.transactions){
+                writer.write(t.toString()+"\n");
+            }
+            writer.close();
+            System.out.println("File written");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
+        }
+    }
+
+    public static Transaction getTransaction(String input){
+        String category, date, type;
+        double amount;
+        //Get date
+        int endOfWord = input.indexOf(' ');
+        date = input.substring(0, endOfWord);
+        input = input.substring(endOfWord+3);   //Shorten the line
+        //Get type
+        endOfWord = input.indexOf(':');
+        type = input.substring(0, endOfWord);
+        input = input.substring(endOfWord+2);   //Shorten the line
+        endOfWord = input.indexOf(' ');
+        amount = Double.parseDouble(input.substring(0,endOfWord));
+        input = input.substring(endOfWord+2);   //Shorten the line
+        category = input.substring(input.indexOf('(')+1, input.indexOf(')'));
+        return new Transaction(amount, category, date, type);
+    }
+
+    public void loadFromFile(String filename) throws FileNotFoundException {
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("first.txt"));
+            String line = br.readLine();
+            while (line != null){
+                this.addTransaction(getTransaction(line));
+                line = br.readLine();
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
 }

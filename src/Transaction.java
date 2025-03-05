@@ -45,7 +45,7 @@ public class Transaction {
 
     @Override
     public String toString(){
-        return this.date + " - " + this.type + ": " + this.amount + "(" + this.amount + ")";
+        return this.date + " - " + this.type + ": " + this.amount + " (" + this.category + ")";
     }
 
 }
