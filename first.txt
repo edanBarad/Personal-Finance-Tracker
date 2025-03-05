@@ -1,4 +1,0 @@
-03-05-2025 - expense: 15.0(Shopping)
-13-07-2021 - expense: 145.0(Gas)
-10-12-2024 - expense: 55.0(Gas)
-23-03-2023 - expense: 67.0(Shopping)

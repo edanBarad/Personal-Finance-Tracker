@@ -63,14 +63,24 @@ public class FinanceManager {
         try{
             BufferedReader br = new BufferedReader(new FileReader("first.txt"));
             String line = br.readLine();
-            while (line != null){
+            while (line != null && !line.isEmpty()){
                 this.addTransaction(getTransaction(line));
                 line = br.readLine();
             }
+            System.out.println("File loaded");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    @Override
+    public String toString(){
+        String ans = "";
+        for (Transaction t: this.transactions){
+            ans += t.toString() + "\n";
+        }
+        return ans;
     }
 
 }

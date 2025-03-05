@@ -17,18 +17,13 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }*/
-
+        System.out.println(financeManager);
         try{
-            BufferedReader br = new BufferedReader(new FileReader("first.txt"));
-            String line = br.readLine();
-            while (line != null){
-                System.out.println(line);
-                line = br.readLine();
-            }
+            financeManager.loadFromFile("first.txt");
 
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-
+        System.out.println(financeManager);
     }
 }
