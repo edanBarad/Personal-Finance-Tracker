@@ -18,11 +18,11 @@ A console-based application to track income and expenses, built in Java.
    git clone https://github.com/edanBarad/Personal-Finance-Tracker.git
 
 ## Technologies Used
--**Java**: The core programming language used for this project.
+**Java**: The core programming language used for this project.
 
--**File Handling**: Used to save and load transactions.
+**File Handling**: Used to save and load transactions.
 
--**OOP**: Object-Oriented Programming principles are followed for clean and modular code.
+**OOP**: Object-Oriented Programming principles are followed for clean and modular code.
 
 ## Future Improvements
 * Add filtering options (e.g., filter transactions by category or date range).
